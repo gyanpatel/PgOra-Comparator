@@ -1,0 +1,59 @@
+{{template "_menu.html" .}}
+
+                    </div>
+                </main>
+                <div class="card-body">
+                  <table id="datatablesSimple">
+                      <thead>
+                          <tr class="table-info">
+                              <th>Date</th>
+                              <th>Table Name</th>
+                              <th>Result</th> 
+                              <th>Oracle Count</th>     
+                              <th>PG Count</th>                                 
+                              <th>Data Diff</th>
+                          </tr>
+                      </thead>
+                      <tfoot>
+                          <tr>
+                            <th>Date</th>
+                            <th>Table Name</th>
+                            <th>Result</th>      
+                            <th>Oracle Count</th>     
+                            <th>PG Count</th>                             
+                            <th>Data Diff</th>
+                          </tr>
+                      </tfoot>
+                      <tbody>
+                          {{ range $rslt := .ComparisonResult}}
+                          <tr>
+                              <td>{{ $rslt.Date}}</td>
+                              <td>{{ $rslt.TableName}}</td>
+                              {{ if eq $rslt.Result "Matches"}}
+                              <td style="color: green;">{{ $rslt.Result}}</td>
+                              {{ else }}
+                              <td style="color:red;">{{ $rslt.Result}}</td>
+                              {{ end}}
+                              <td>{{ $rslt.OraCount}}</td>
+                              <td>{{ $rslt.PGCount}}</td>
+                              <td>
+                                  <table  class="table table-bordered table-sm">
+                                {{ range $diff := .DataDiff}}
+                                <tr>
+                                <td>{{ $diff.DbName }} </td>
+                                <td>{{ $diff.Data }}</td>
+                                </tr>
+                                {{ end }}
+                                 
+                                </table>
+                              </td>
+                          </tr>
+                          {{ end }}
+                      </tbody>
+                  </table>
+              </div>
+
+                {{template "_footer.html"}}
+                 
+    </body>
+</html>

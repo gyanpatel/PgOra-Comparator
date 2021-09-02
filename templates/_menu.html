@@ -1,0 +1,98 @@
+{{define "_menu.html"}}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>{{.PageDesc}}-PgOra Comparator</title>
+        
+        <link rel="icon" href="assets/img/fujitsufavicon.ico" type="image/gif" >
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="assets/css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
+        
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-info bg-info ">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3 text-white" href="home"><i class="fas fa-home"></i> PgOra Comparator</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 text-white" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div  id = "timerDigital" class="input-group">
+                <button type="button"  class="btn btn-danger btn-sm" onclick="history.back()" >Back</button>
+                <span id = "timerSpan" class = "bg-secondary text-white sm"></span>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                     <!---   <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li> -->
+                        <li><a class="dropdown-item" href="logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            {{template "_sidenav.html" .}}
+             <div id="layoutSidenav_content">
+                 <main>
+                     <div class="container-fluid px-4">
+                         <h1 class="mt-4">PgOra Comparator</h1>
+                         <ol class="breadcrumb mb-4">
+                             <li class="breadcrumb-item active text-indigo">Postgres and Oracle Table Data Comparator - {{.PageDesc}}</li>
+                         </ol>
+                          <script>
+                            startTimerDigital();
+                            function startTimerDigital(){
+                            
+                              var timerDiv = document.getElementById("timerDigital");
+                              var timerSpan = document.getElementById("timerSpan");
+                              var sesstime = 60;
+                                    var timerhours = sesstime%60;
+                                    var timerct = sesstime - timerhours*60;
+                                    var timersecs = 0;
+                              var datetime = new Date();
+                              datetime.setHours(timerhours);
+                              datetime.setMinutes(timerct);
+                              datetime.setSeconds(timersecs);
+                              var intid = setInterval(timeDisplay, 1000);
+                               function timeDisplay() {
+                                digiTimerDisplay = ("0" + datetime.getHours()).slice(-2)+":"+("0" + datetime.getMinutes()).slice(-2)+":"+("0" + datetime.getSeconds()).slice(-2);
+                               
+                               if (datetime.getSeconds() == 0 && datetime.getMinutes() == 0 && datetime.getHours() ==0 ){
+                                timerSpan.textContent = "Session expired ";
+                                clearInterval(intid);
+                                window.location.href='logout';
+                                return;
+                               } else {
+                                timerSpan.textContent = "Your session expires in "+digiTimerDisplay;
+                               }
+                                 timerDiv.style.display = "inline-block";
+                                 datetime.setSeconds(datetime.getSeconds()- 1);
+                            
+                            
+                            
+                            
+                            }
+                            }
+                            
+                            </script>
+                         {{end}}

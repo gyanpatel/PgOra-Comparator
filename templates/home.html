@@ -1,0 +1,70 @@
+{{template "_menu.html" .}}
+                        <form name = "compare" id = "compare" method="post" action="comp">
+                        <div class="form-group form-control">
+                            <select name = "tablelist" id = "tablelist" class="selectpicker" multiple data-live-search="true" required>
+                             {{range  $tablelist := .TableQueryList }}  
+                             <option value="{{ $tablelist.TableName }}">{{  $tablelist.TableName}}</option>
+                             {{ end }} 
+                             </select>
+                        <button type="submit" class="btn btn-primary btn-sm" >Compare</button>
+                        <button type="button" class="btn btn-info btn-sm" onclick="window.location.href='/compall'">Compare All</button>
+                     <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='/home'">Reset</button>
+                     </div>
+                    </form>
+                    </div>
+                </main>
+                <div class="card-body">
+                  <table id="datatablesSimple">
+                      <thead>
+                          <tr class="table-info">
+                              <th>Date</th>
+                              <th>Table Name</th>
+                              <th>Result</th> 
+                              <th>Oracle Count</th>     
+                              <th>PG Count</th>                                 
+                              <th>Data Diff</th>
+                          </tr>
+                      </thead>
+                      <tfoot>
+                          <tr>
+                            <th>Date</th>
+                            <th>Table Name</th>
+                            <th>Result</th>      
+                            <th>Oracle Count</th>     
+                            <th>PG Count</th>                             
+                            <th>Data Diff</th>
+                          </tr>
+                      </tfoot>
+                      <tbody>
+                          {{ range $rslt := .ComparisonResult}}
+                          <tr>
+                              <td>{{ $rslt.Date}}</td>
+                              <td>{{ $rslt.TableName}}</td>
+                              {{ if eq $rslt.Result "Matches"}}
+                              <td style="color: green;">{{ $rslt.Result}}</td>
+                              {{ else }}
+                              <td style="color:red;">{{ $rslt.Result}}</td>
+                              {{ end}}
+                              <td>{{ $rslt.OraCount}}</td>
+                              <td>{{ $rslt.PGCount}}</td>
+                              <td>
+                                  <table  class="table table-bordered table-sm">
+                                {{ range $diff := .DataDiff}}
+                                <tr>
+                                <td>{{ $diff.DbName }} </td>
+                                <td>{{ $diff.Data }}</td>
+                                </tr>
+                                {{ end }}
+                                 
+                                </table>
+                              </td>
+                          </tr>
+                          {{ end }}
+                      </tbody>
+                  </table>
+              </div>
+
+                {{template "_footer.html"}}
+                 
+    </body>
+</html>

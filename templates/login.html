@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+  <link rel="icon" href="assets/img/fujitsufavicon.ico" type="image/gif" >
+  <title>PgOra Comparator</title>
+  <link rel="stylesheet" href="assets/css/loginstyle.css" media="screen" type="text/css" />
+
+</head>
+<style>
+	body, html {
+	height:86%;
+	margin: 0;
+  }
+	.bg {
+	  /* The image used */
+	  background-image: url("assets/img/login.jpg");
+	
+	  /* Full height */
+	  height: 100%; 
+	
+	  /* Center and scale the image nicely */
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+	}
+  </style>
+	<div class = "bg">
+		<body>
+		
+  <div class="wrap">
+		<div class="avatar">
+      <img src="assets/img/login.png">
+		</div>
+		<form method="post" action="/loginval">
+		<input type="text" name="username" id = "username" placeholder="username" required>
+		<div class="bar">
+			<i></i>
+		</div>
+		<input type="password" name="password" id = "password" placeholder="password" required>
+		<button type="submit" >Sign in</button>
+		<div id = "errormessage"> {{.LoginError}} </div>
+		</form>
+		<br><br>
+		<a href="awsssologin"><button type="submit" >  <span class="glyphicon glyphicon-log-in"> </span> Login using AWS-SSO</button></a>
+ 
+	</div>
+
+</body>
+</div>
+</html>
