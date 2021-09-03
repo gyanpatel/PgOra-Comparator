@@ -21,7 +21,7 @@ func compareOraPgTables(selTableQueryList []TableQueryList) (*[]ComparisonResult
 		var pgTableBytesStr []string
 		rowsPG, err := dbConPG.Query(queryRec.PgQuery)
 		if err != nil {
-			log.Println(" PG - Unable to query data ", err)
+			log.Println(" PG - Unable to query data ", err, queryRec.PgQuery)
 			return &comparisonResult, err
 		}
 		log.Println(" Fetching PG Data Table = ", queryRec.TableName)

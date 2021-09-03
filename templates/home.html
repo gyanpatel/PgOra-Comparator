@@ -14,7 +14,7 @@
                     </div>
                 </main>
                 <div class="card-body">
-                  <table id="datatablesSimple">
+                  <table id="dbcompresult">
                       <thead>
                           <tr class="table-info">
                               <th>Date</th>
@@ -48,7 +48,7 @@
                               <td>{{ $rslt.OraCount}}</td>
                               <td>{{ $rslt.PGCount}}</td>
                               <td>
-                                  <table  class="table table-bordered table-sm">
+                                <table class="table table-bordered table-sm">
                                 {{ range $diff := .DataDiff}}
                                 <tr>
                                 <td>{{ $diff.DbName }} </td>
@@ -64,7 +64,7 @@
                   </table>
               </div>
 
-                {{template "_footer.html"}}
-                 
+                {{template "_footer.html"}}   
+
     </body>
 </html>

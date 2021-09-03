@@ -72,7 +72,6 @@ SELECT lower(table_name), 'SELECT '||LISTAGG (output,'||')   WITHIN GROUP (ORDER
 			end as null_check_post
 	from   dba_tab_columns t
 	where data_type not in ('BLOB','CLOB')
-    and column_name not in ('NODE_ADDITIONAL_INFORMATION ')
 	and  (
 	owner = 'BCMS' and table_name in (
 		'IMPORT_CSV_BULK_FILE', 
@@ -346,6 +345,6 @@ SELECT lower(table_name), 'SELECT '||LISTAGG (output,'||')   WITHIN GROUP (ORDER
 	
 	)
 	order  by owner, table_name, column_id
-	) where table_name = 'BRDB_BRANCH_NODE_INFO'
+	) 
 	
 	) GROUP BY table_name
