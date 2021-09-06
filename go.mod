@@ -1,4 +1,4 @@
-module OraPGComparator
+module PGOraComparator
 
 go 1.15
 

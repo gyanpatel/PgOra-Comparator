@@ -1,10 +1,10 @@
-SELECT lower(table_name), 'SELECT '||LISTAGG (output,'||')   WITHIN GROUP (ORDER BY table_name )  ||'from ops$brdb.' || table_name
+SELECT lower(table_name), 'SELECT '||LISTAGG (output,'||')   WITHIN GROUP (ORDER BY table_name )  ||'from '||owner||'.' || table_name
 	FROM 
 	(
-	select   table_name, null_check_pre|| pre || mid || post || null_check_post  
+	select   owner,table_name, null_check_pre|| pre || mid || post || null_check_post  
 			AS output
 	from (
-	select table_name, 
+	select table_name,owner, 
 		(select count(*) from dba_tab_columns c where c.owner=t.owner and c.table_name=t.table_name and c.column_name = 'FAD_HASH') as fh_chk, -- can be used to split by fad hash
 		lead(column_name) over (partition by table_name order by column_id) x, -- if last column then do not concatenate ||
 		lag(column_name) over (partition by table_name order by column_id) y, -- not used...
@@ -345,6 +345,6 @@ SELECT lower(table_name), 'SELECT '||LISTAGG (output,'||')   WITHIN GROUP (ORDER
 	
 	)
 	order  by owner, table_name, column_id
-	) 
+	) WHERE lower(table_name) NOT IN ('import_csv_bulk_file_audit','obc_stock_unit_type','obc_interface_audit','emdb2_associated_stock_unit','c_lfs_rdc_header','c_brdb_desktop_memo_user_distr','c_brdb_device_type_principal_map','c_brdb_ext_feed_reports','c_brdb_ped_keys_a','c_brdb_ped_keys','c_brdb_ped_keys_b','c_brdb_rx_message_journal','c_brdb_rx_report_reprints','c_brdb_branch_decl','brdb_desktop_memo_user_distr','brdb_device_type_principal_map','brdb_ext_feed_reports','brdb_ped_keys_a','brdb_ped_keys','brdb_ped_keys_b','brdb_rx_message_journal','brdb_rx_report_reprints')
 	
-	) GROUP BY table_name
+	) GROUP BY table_name,owner
