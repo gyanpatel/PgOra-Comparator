@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"database/sql"
-	"io/ioutil"
 	"log"
 	"sort"
 	"strings"
@@ -119,6 +118,7 @@ func getTableDiff(oracData, pgData *[]string) *[]DataDiff {
 	return &dataDiff
 }
 
+/*
 func getTableQuery() error {
 	sqlQuery, err := ioutil.ReadFile("CompQuery.sql")
 	if err != nil {
@@ -145,3 +145,4 @@ func getTableQuery() error {
 	}
 	return nil
 }
+*/

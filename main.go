@@ -61,19 +61,19 @@ func init() {
 	}
 	dbConPG.SetMaxIdleConns(5)
 
-	err = getTableQuery()
+	//err = getTableQuery()
+	//if err != nil {
+	//	log.Fatal("FATAL : calling getTableQuery() UNABLE TO GET query list,  FAILURE ", err)
+	//}
+
+	queryFile, err := ioutil.ReadFile("ComparisonQuery.json")
 	if err != nil {
-		log.Fatal("FATAL : calling getTableQuery() UNABLE TO GET query list,  FAILURE ", err)
+		log.Println("ERROR : UNABLE TO READ ComparisonQuery.json => ", err)
 	}
-	/*
-		queryFile, err := ioutil.ReadFile("ComparisonQuery.json")
-		if err != nil {
-			log.Println("ERROR : UNABLE TO READ ComparisonQuery.json => ", err)
-		}
-		err = json.Unmarshal(queryFile, &tableQueryList)
-		if err != nil {
-			log.Println("ERROR : UNABLE TO PARSE THE ComparisonQuery.json ", err)
-		} */
+	err = json.Unmarshal(queryFile, &tableQueryList)
+	if err != nil {
+		log.Println("ERROR : UNABLE TO PARSE THE ComparisonQuery.json ", err)
+	}
 }
 func readK8LocalSecret(envVarName string) (SecretDetails, error) {
 	var secretDet SecretDetails

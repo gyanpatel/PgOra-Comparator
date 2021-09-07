@@ -1,24 +1,5 @@
 [
-    {
-        "tablename": "BRDB_APS_MANUAL_TXN_AUDIT",
-        "pgquery": "SELECT trim(to_char( TXN_PROCESS_ID,'099999999')) ||coalesce( ACTION_REF  ,' ')||coalesce( ACTION_DESC  ,' ')||  trim(to_char( RECORD_TYPE,'099')) ||  trim(to_char( TXN_TYPE,'09')) || BRANCH_ACCOUNTING_CODE  || RECEIPT_REF  ||  trim(to_char( RECEIPT_NO,'09999')) ||coalesce( REV_RECEIPT_REF  ,' ')||coalesce(  trim(to_char( REV_RECEIPT_NO,'09999')) ,' ')||coalesce( FAILURE_CODE  ,' ')||  trim(to_char( CLIENT_ACCOUNT_NO,'09999')) ||coalesce(  trim(to_char( CLIENT_SERV_CODE,'09999')) ,' ')||coalesce( CUSTOMER_REF  ,' ')||  trim(to_char( DATE_ENTERED , 'YYYYMMDDHH24MISS')) ||  trim(to_char( APS_PAY_AMT,'09999999999')) ||  trim(to_char( PROCESSING_DATE , 'YYYYMMDDHH24MISS')) ||  trim(to_char( SESSION_ID,'0999999')) ||  trim(to_char( TRANSACTION_ID,'09999')) ||  trim(to_char( NODE_ID,'099')) ||coalesce(  trim(to_char( REVERSAL_SESSION_ID,'0999999')) ,' ')||coalesce(  trim(to_char( REVERSAL_TRANSACTION_ID,'09999')) ,' ')||coalesce(  trim(to_char( REVERSAL_NODE_ID,'099')) ,' ')||coalesce( USER_NAME  ,' ')||coalesce(substr(ADDITIONAL_DATA,1,2000)  ,' ')|| TRANSMISSION_SOURCE  ||  trim(to_char( CAPTURE_CODE,'09')) ||  trim(to_char( PROD_ID,'09999999999')) ||  trim(to_char( TRADING_DATE , 'YYYYMMDDHH24MISS'))  from ops$brdb.BRDB_APS_MANUAL_TXN_AUDIT ",
-        "oraquery": "SELECT trim(to_char( TXN_PROCESS_ID,'099999999')) ||coalesce( ACTION_REF  ,' ')||coalesce( ACTION_DESC  ,' ')||  trim(to_char( RECORD_TYPE,'099')) ||  trim(to_char( TXN_TYPE,'09')) || BRANCH_ACCOUNTING_CODE  || RECEIPT_REF  ||  trim(to_char( RECEIPT_NO,'09999')) ||coalesce( REV_RECEIPT_REF  ,' ')||coalesce(  trim(to_char( REV_RECEIPT_NO,'09999')) ,' ')||coalesce( FAILURE_CODE  ,' ')||  trim(to_char( CLIENT_ACCOUNT_NO,'09999')) ||coalesce(  trim(to_char( CLIENT_SERV_CODE,'09999')) ,' ')||coalesce( CUSTOMER_REF  ,' ')||  trim(to_char( DATE_ENTERED , 'YYYYMMDDHH24MISS')) ||  trim(to_char( APS_PAY_AMT,'09999999999')) ||  trim(to_char( PROCESSING_DATE , 'YYYYMMDDHH24MISS')) ||  trim(to_char( SESSION_ID,'0999999')) ||  trim(to_char( TRANSACTION_ID,'09999')) ||  trim(to_char( NODE_ID,'099')) ||coalesce(  trim(to_char( REVERSAL_SESSION_ID,'0999999')) ,' ')||coalesce(  trim(to_char( REVERSAL_TRANSACTION_ID,'09999')) ,' ')||coalesce(  trim(to_char( REVERSAL_NODE_ID,'099')) ,' ')||coalesce( USER_NAME  ,' ')||coalesce(substr(ADDITIONAL_DATA,1,2000)  ,' ')|| TRANSMISSION_SOURCE  ||  trim(to_char( CAPTURE_CODE,'09')) ||  trim(to_char( PROD_ID,'09999999999')) ||  trim(to_char( TRADING_DATE , 'YYYYMMDDHH24MISS'))  from ops$brdb.BRDB_APS_MANUAL_TXN_AUDIT "
-    },
-    {
-        "tablename": "brdb_rx_message_journal",
-        "pgquery": "select journal_xml from ops$brdb.brdb_rx_message_journal ",
-        "oraquery": "select journal_xml from ops$brdb.brdb_rx_message_journal "
-    },
-{
-    "tablename": "brdb_rx_recovery_transactions",
-    "pgquery": "select recovery_xml from ops$brdb.brdb_rx_recovery_transactions brrt ",
-    "oraquery": "select recovery_xml from ops$brdb.brdb_rx_recovery_transactions brrt "
-},
- {
-        "tablename": "rdds_aps_delivery_agreements",
-        "pgquery": "select CLIENT_ACCOUNT_NO||FORMAT_PROCESS||FILE_LOCATION||FILE_PREFIX||FILE_SEQUENCE_NO||SEQUENCE_LENGTH from ops$brdb.rdds_aps_delivery_agreements rada         ",
-        "oraquery": "select CLIENT_ACCOUNT_NO||FORMAT_PROCESS||FILE_LOCATION||FILE_PREFIX||FILE_SEQUENCE_NO||SEQUENCE_LENGTH from ops$brdb.rdds_aps_delivery_agreements rada         "
-    },
+ 
     {
         "tablename": "testcomp2",
         "pgquery": "select 'ABC' AS colname ",
