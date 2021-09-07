@@ -6,3 +6,5 @@ Steps to Use :
 3. Add env variables with file path of step2, PG env var nae -pgsecret,Ora env var name - orasecret, App env var name - appconfig
 4. Add the Query to compare in the CompQuery.json file.
 5. Run the Binary and aceess the application URL to view and compare tables.
+
+Contact gppatel.lucky@gmail.com in case of any questions.
