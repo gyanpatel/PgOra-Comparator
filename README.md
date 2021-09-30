@@ -1,4 +1,6 @@
 # PgOra-Comparator
+This Tool compares Oracle vs postgres data. This will be an ideal tool for data validation post Database migration. Either Aurora Postgres to Oracle or Oracle to Posgres/Aurora
+
 Postgres and Oracle Table Data Comparator
 Steps to Use :
 1. Create a DB user on both Oracle and Postgres with read only access to required tables.
