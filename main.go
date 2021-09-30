@@ -2,7 +2,9 @@ package main
 
 import (
 	"database/sql"
+	"embed"
 	"encoding/json"
+	"io/fs"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -18,6 +20,9 @@ var dbConPG *sql.DB
 var dbConOra *sql.DB
 var secretDetails SecretDetails
 var tableQueryList []TableQueryList
+
+//go:embed templates/*
+var templates embed.FS
 
 // Initialize db connections
 func init() {
@@ -96,7 +101,15 @@ func readK8LocalSecret(envVarName string) (SecretDetails, error) {
 func main() {
 	log.Println("Info :", "Starting Ora PG Comparator...")
 	log.Println("Current Query list ", tableQueryList)
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("templates/assets"))))
+
+	assets, err := fs.Sub(fs.FS(templates), "templates/assets")
+	if err != nil {
+		log.Println("application could not load the static files ")
+	}
+
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.FS(assets))))
+
+	//http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("templates/assets"))))
 
 	http.HandleFunc("/login", handleLogin)
 	http.HandleFunc("/", handleLogin)

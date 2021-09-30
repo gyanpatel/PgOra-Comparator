@@ -30,7 +30,7 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 		ssoLoginVal(w, r, code)
 	}
 	e := ErrorMessages{LoginError: "", SessionTimeOutMins: secretDetails.SessionTimeOutMins}
-	t := template.Must(template.ParseFiles("templates/login.html"))
+	t := template.Must(template.ParseFS(templates, "templates/login.html"))
 	err := t.Execute(w, e)
 	if err != nil {
 		log.Println("ERROR:handleLogin Error occured Parsing - templates/login ", err)
@@ -64,7 +64,7 @@ func handleLoginVal(w http.ResponseWriter, r *http.Request) {
 	if err != nil || auth == "N" {
 		log.Println("ERROR : handleLoginVal", userName, "- login attempt failed ")
 		e := ErrorMessages{LoginError: "Invalid login details", SessionTimeOutMins: secretDetails.SessionTimeOutMins}
-		t := template.Must(template.ParseFiles("templates/login.html"))
+		t := template.Must(template.ParseFS(templates, "templates/login.html"))
 		errt := t.Execute(w, e)
 		if errt != nil {
 			log.Println("ERROR:handleLoginVal Error occured Parsing - templates/login ", errt)
@@ -112,7 +112,7 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 		log.Println("ERROR:handleHome Error occured r.ParseForm() ", errp)
 	}
 	homePageItems := CommonPageItems{UserName: userName, TableQueryList: tableQueryList, PageDesc: "Table Selection"}
-	t := template.Must(template.ParseFiles("templates/home.html", "templates/_menu.html", "templates/_sidenav.html", "templates/_footer.html"))
+	t := template.Must(template.ParseFS(templates, "templates/home.html", "templates/_menu.html", "templates/_sidenav.html", "templates/_footer.html"))
 	errt := t.Execute(w, homePageItems)
 	if errt != nil {
 		log.Println("ERROR:handleHome Error occured Parsing - templates/home.html ", errt)
@@ -150,7 +150,7 @@ func handleCompare(w http.ResponseWriter, r *http.Request) {
 	}
 
 	homePageItems := CommonPageItems{ComparisonResult: *comparisonResult, UserName: userName, TableQueryList: tableQueryList, PageDesc: "Comparison result"}
-	t := template.Must(template.ParseFiles("templates/home.html", "templates/_menu.html", "templates/_sidenav.html", "templates/_footer.html"))
+	t := template.Must(template.ParseFS(templates, "templates/home.html", "templates/_menu.html", "templates/_sidenav.html", "templates/_footer.html"))
 	errt := t.Execute(w, homePageItems)
 	if errt != nil {
 		log.Println("ERROR:handleHome Error occured Parsing - templates/home.html ", errt)
@@ -171,7 +171,7 @@ func handleHist(w http.ResponseWriter, r *http.Request) {
 	}
 
 	homePageItems := CommonPageItems{UserName: userName, TableQueryList: tableQueryList, PageDesc: "Comparison History"}
-	t := template.Must(template.ParseFiles("templates/history.html", "templates/_menu.html", "templates/_sidenav.html", "templates/_footer.html"))
+	t := template.Must(template.ParseFS(templates, "templates/history.html", "templates/_menu.html", "templates/_sidenav.html", "templates/_footer.html"))
 	errt := t.Execute(w, homePageItems)
 	if errt != nil {
 		log.Println("ERROR:handleHist Error occured Parsing - templates/home.html ", errt)
@@ -180,7 +180,7 @@ func handleHist(w http.ResponseWriter, r *http.Request) {
 
 func renderErrorPage(w http.ResponseWriter, errorMsg error) {
 	errPageItems := CommonPageItems{PageDesc: errorMsg.Error()}
-	t := template.Must(template.ParseFiles("templates/error.html", "templates/_menu.html", "templates/_sidenav.html", "templates/_footer.html"))
+	t := template.Must(template.ParseFS(templates, "templates/error.html", "templates/_menu.html", "templates/_sidenav.html", "templates/_footer.html"))
 	errt := t.Execute(w, errPageItems)
 	if errt != nil {
 		log.Println("ERROR:renderErrorPage Error occured Parsing - templates/error.html ", errt)
@@ -199,7 +199,7 @@ func userSessionValidation(w http.ResponseWriter, r *http.Request) (string, erro
 	}
 	if auth, ok := session.Values[authenticatedYN].(bool); !ok || !auth || len(userName) == 0 {
 		e := ErrorMessages{LoginError: "Your sesssion has expired or you haven't logged in, please login .", SessionTimeOutMins: secretDetails.SessionTimeOutMins}
-		t := template.Must(template.ParseFiles("templates/login.html"))
+		t := template.Must(template.ParseFS(templates, "templates/login.html"))
 		errt := t.Execute(w, e)
 		if errt != nil {
 			log.Println("ERROR:userSessionValidation Error occured Parsing - templates/login.html ", errt)
@@ -229,7 +229,7 @@ func handleAwsSsoLogin(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, url, http.StatusSeeOther)
 	e := ErrorMessages{LoginError: "", SessionTimeOutMins: secretDetails.SessionTimeOutMins}
-	t := template.Must(template.ParseFiles("templates/login.html"))
+	t := template.Must(template.ParseFS(templates, "templates/login.html"))
 	errt := t.Execute(w, e)
 	if errt != nil {
 		log.Println("ERROR:handleAwsSsoLogin Error occured Parsing - templates/login.html ", errt)

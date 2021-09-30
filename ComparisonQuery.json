@@ -1,9 +1,9 @@
 [
  
     {
-        "tablename": "testcomp2",
-        "pgquery": "select 'ABC' AS colname ",
-        "oraquery": "select 'ABCA' AS colname  from dual"
+        "tablename": "BRDB_RX_RECOVERY_TRANSACTIONS",
+        "pgquery": "SELECT recovery_xml  FROM ops$brdb.BRDB_RX_RECOVERY_TRANSACTIONS limit 10;",
+        "oraquery": "SELECT recovery_xml  FROM ops$brdb.BRDB_RX_RECOVERY_TRANSACTIONS"
     }
     ,
     {
